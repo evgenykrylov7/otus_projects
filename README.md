@@ -110,7 +110,7 @@ systemctl enable node_exporter
 systemctl start node_exporter
 ```
 Для сбора метрик со всех компонентов системы (начиная с VM и заканчивая DB, не забудьте про blackbox exporter который будет проверять доступность вашей CMS) 
-(см. )
+(см. prometheus.yml и node_expoter.yml)
 
 ## На этой же или дополнительной виртуальной машине установите Prometheus задачей которого будет раз в 5 секунд собирать метрики с экспортеров
 
@@ -152,10 +152,12 @@ systemctl start Prometheus
 systemctl status Prometheus
 ```
 
+см. prometheus.yml
 ## На этой же или дополнительной виртуальной машине установите Alertmanager и сконфигурируйте его таким образом чтобы в случае недоступности какого либо компонента был отправлен alert с важность Critical в один из канал оповещений (канал оповещений на выбор: slack or telegram)
 
 ### Установка Alertmanager
 
+```
 wget https://github.com/prometheus/alertmanager/releases/download/v0.21.0/alertmanager-0.21.0.linux-amd64.tar.gz
 mkdir /etc/alertmanager /var/lib/prometheus/alertmanager
 tar zxvf alertmanager-*.linux-amd64.tar.gz
@@ -186,5 +188,6 @@ WantedBy=multi-user.target
 systemctl daemon-reload
 systemctl enable alertmanager
 systemctl start alertmanager
+```
 
 В случае недоступности какого либо компонента отправляется alert с важность Critical в Telergram. (см. alertmanager.yml и prometheus.yml)
