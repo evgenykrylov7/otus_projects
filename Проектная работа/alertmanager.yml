@@ -1,0 +1,8 @@
+route:
+  receiver: 'telepush'
+
+receivers:
+  - name: 'telepush'
+    webhook_configs:
+      - url: 'https://telepush.dev/api/inlets/alertmanager/4bb83f'
+    
